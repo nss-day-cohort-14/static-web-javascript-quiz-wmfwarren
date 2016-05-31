@@ -1,21 +1,19 @@
 var button = document.getElementById("build");
+var key;
 var seed = {
-		char:'a', //the object to seed the tree with
- 		rows:0
-	};
+	char: '',
+	rows: 0
+}
+
 /////Functions\\\\\
 // this functions listens for the return key being pressed
 function enterKey(keyStroke) {
 	if(keyStroke.keyCode === 13) {
 		// console.log("I hit enter");
-		tree(); //call tree if you his enter
+		tree(seed); //call tree if you his enter
 	} 
 }
-//seed constructor
-function Seed (){ //constructor
-	this.char = document.getElementById("char").value;
-	this.rows = parseInt(document.getElementById("numRows").value);
-}
+
 //printing functions
 function printChars (printChar, amountToPrint) { //print the character
 	let printStr = printChar;
@@ -35,10 +33,14 @@ function printSpace (numRows, spaceToPrint) { //print the whitespace
 	return printSpaceString; //return the string
 }
 //this is the MAIN tree function
-function tree(){
+function tree(seed){
 	//console.log("Trigger", event); // test to see if function triggered
-	
-	var mySeed = new Seed(); //create a new seed
+	var mySeed = seed;
+
+	console.log("mySeed is ", mySeed );
+
+	mySeed.char = document.getElementById("char").value;
+	mySeed.rows = parseInt(document.getElementById("numRows").value);
 
 	if(mySeed.char.length === 1 && mySeed.rows > 0 ){ // error check for no char or more than one char
 		for(let i = 0; i < mySeed.rows; i++){ //print rows
@@ -50,7 +52,6 @@ function tree(){
 }	
 
 /////Code\\\\\
-
 
 button.addEventListener("click", tree);
 window.addEventListener("keypress", enterKey);
